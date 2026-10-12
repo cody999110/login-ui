@@ -1,0 +1,144 @@
+<!doctype html>
+<!-- © 2026 cody999110 · Licensed under CC BY-NC-SA 4.0 (see LICENSE) -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sign-up flow</title>
+<meta name="description" content="An interactive sign-up flow: sign in / create account, avatar picker, one-time code, theme palette and a profile card." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<svg class="arcs" aria-hidden="true" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <circle cx="170" cy="200" r="470" />
+  <circle cx="1100" cy="700" r="520" />
+  <circle cx="110" cy="880" r="330" />
+</svg>
+
+<div class="page">
+  <!-- left rail: step counter -->
+  <aside class="rail rail-left" aria-hidden="true">
+    <div class="step-num"><span class="num-roll"></span></div>
+    <div class="step-of mono">/ 06</div>
+    <div class="step-name"></div>
+    <ol class="step-track"></ol>
+  </aside>
+
+  <main class="stage">
+    <div class="cast-switch" role="group" aria-label="Cast">
+      <button type="button" class="mono" data-cast="cast1" aria-pressed="true">Cast 1</button>
+      <button type="button" class="mono" data-cast="cast2" aria-pressed="false">Cast 2</button>
+    </div>
+    <div class="mobile-step mono" aria-hidden="true"></div>
+
+    <div class="device-wrap">
+      <div class="device">
+        <!-- ============ the card ============ -->
+        <div class="card" id="card">
+          <div class="hero hero-theme" id="heroTheme" aria-hidden="true"></div>
+          <div class="hero hero-picker ht" id="heroPicker">
+            <div class="strip" id="strip" tabindex="0" role="listbox" aria-label="Avatars — drag or use the arrow keys"></div>
+            <div class="bursts" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+
+          <div class="sheet-line" id="sheetLine" aria-hidden="true"></div>
+          <div class="sheet" id="sheet" aria-hidden="true"></div>
+
+          <h1 class="title" id="title"><span class="title-text" aria-hidden="true"></span><span class="sr-only title-sr"></span></h1>
+          <p class="sub" id="sub" aria-live="polite"></p>
+
+          <!-- sign in -->
+          <form class="screen" data-screen="signin" novalidate>
+            <label class="fld" style="top:456px">
+              <span class="ring"></span><span class="lb">Email</span>
+              <input type="email" name="email" autocomplete="email" placeholder="Email" required />
+            </label>
+            <label class="fld fld-pass" style="top:530px">
+              <span class="ring"></span><span class="lb">Password</span>
+              <input type="password" name="password" autocomplete="current-password" placeholder="Password" required minlength="6" />
+              <span class="slices" aria-hidden="true"></span>
+              <button type="button" class="eye" aria-label="Show password"><svg viewBox="0 0 22 20"><path d="M1 10 Q11 0 21 10 Q11 20 1 10Z"/><circle cx="11" cy="10" r="3.2"/></svg></button>
+            </label>
+            <button class="btn" type="submit"><span class="lbl">Sign in</span><span class="dot"><svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5"/></svg></span><span class="spin" aria-hidden="true"></span></button>
+            <p class="foot">New here? <button type="button" class="link" data-go="signup">Create account</button></p>
+          </form>
+
+          <!-- sign up -->
+          <form class="screen" data-screen="signup" novalidate>
+            <label class="fld" style="top:366px">
+              <span class="ring"></span><span class="lb">Full name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Full name" required minlength="2" />
+            </label>
+            <label class="fld" style="top:440px">
+              <span class="ring"></span><span class="lb">Email</span>
+              <input type="email" name="email" autocomplete="email" placeholder="Email" required />
+            </label>
+            <label class="fld fld-pass" style="top:514px">
+              <span class="ring"></span><span class="lb">Password</span>
+              <input type="password" name="password" autocomplete="new-password" placeholder="Password" required minlength="6" />
+              <span class="slices" aria-hidden="true"></span>
+              <span class="zest mono" aria-live="polite"></span>
+            </label>
+            <div class="bars" style="top:590px" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+            <button class="btn" type="submit"><span class="lbl">Continue</span><span class="dot"><svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5"/></svg></span><span class="spin" aria-hidden="true"></span></button>
+            <p class="foot">Already have an account? <button type="button" class="link" data-go="signin">Sign in</button></p>
+          </form>
+
+          <!-- avatar picker -->
+          <form class="screen" data-screen="picker" novalidate>
+            <div class="dots" style="top:598px" aria-hidden="true"></div>
+            <button class="btn" type="submit"><span class="lbl">This is me</span><span class="dot"><svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5"/></svg></span></button>
+            <p class="foot">You can change it later.</p>
+          </form>
+
+          <!-- one-time code -->
+          <form class="screen" data-screen="otp" novalidate>
+            <div class="cells" style="top:462px" role="group" aria-label="6-digit code"></div>
+            <button class="btn" type="submit"><span class="lbl">Verify</span><span class="dot"><svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5"/></svg></span><span class="spin" aria-hidden="true"></span><span class="chk" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="21"/><path d="M12 23 L19 30 L32 15"/></svg></span></button>
+            <p class="foot">Didn't get it? <button type="button" class="link" id="resend">Resend</button></p>
+          </form>
+
+          <!-- theme palette -->
+          <form class="screen" data-screen="palette" novalidate>
+            <div class="swatches" style="top:488px" role="radiogroup" aria-label="Theme color"></div>
+            <button class="btn" type="submit"><span class="lbl">Done</span><span class="dot"><svg viewBox="0 0 20 20"><path d="M4 10h11M11 5l5 5-5 5"/></svg></span></button>
+            <p class="foot"><button type="button" class="link" data-skip>Skip for now</button></p>
+          </form>
+
+          <button type="button" class="back" id="back" aria-label="Back" tabindex="-1"><svg viewBox="0 0 14 14"><path d="M9 2 L4 7 L9 12"/></svg></button>
+        </div>
+
+        <!-- heads that break the card's top edge -->
+        <div class="pop" id="pop" aria-hidden="true"></div>
+
+        <!-- ============ profile card (back face) ============ -->
+        <section class="profile" id="profile" aria-label="Profile" hidden>
+          <div class="pf-bg ht"></div>
+          <div class="pf-bar">
+            <button type="button" class="pf-icon" data-edit aria-label="Edit theme"><svg viewBox="0 0 14 14"><path d="M9 2 L4 7 L9 12"/></svg></button>
+            <span>Profile</span>
+            <span class="pf-icon pf-more" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="pf-let" aria-hidden="true"></div>
+          <div class="pf-ring" aria-hidden="true"></div>
+          <div class="pf-av pf-av-a" aria-hidden="true"><img alt="" /></div>
+          <div class="pf-av pf-av-b" aria-hidden="true"><img alt="" /></div>
+          <h2 class="pf-name"><span class="pf-name-text" aria-hidden="true"></span><span class="sr-only pf-name-sr"></span></h2>
+          <p class="pf-handle mono"></p>
+          <ul class="pf-tags"><li>film</li><li>citywalk</li><li>bubble tea</li></ul>
+          <p class="pf-meta mono"></p>
+          <div class="pf-actions">
+            <button type="button" class="pf-btn pf-outline" data-edit>Edit theme</button>
+            <button type="button" class="pf-btn pf-solid" data-signout>Sign out</button>
+          </div>
+          <div class="stickers" aria-hidden="true"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/cast.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
