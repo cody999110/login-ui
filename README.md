@@ -3,26 +3,69 @@
 一个完整可交互的「登录 / 注册」流程页面，纯 HTML + CSS + JavaScript，**无框架、无构建、无依赖**。
 直接双击 `index.html` 即可在浏览器打开，也可以原样部署到任何静态托管（GitHub Pages、Vercel、Netlify、OSS…）。
 
-> 授权：代码为 [CC BY-NC-SA 4.0](LICENSE)（署名 · 非商业性使用 · 相同方式共享），角色图片另有[单独条款](assets/img/LICENSE.md)。详见文末「授权」。
+![Vanilla](https://img.shields.io/badge/HTML%20%2F%20CSS%20%2F%20JS-vanilla-F7D458?style=flat-square&labelColor=151515)
+![No build](https://img.shields.io/badge/build-none-8EEAE7?style=flat-square&labelColor=151515)
+![Zero deps](https://img.shields.io/badge/dependencies-0-F7B6C6?style=flat-square&labelColor=151515)
 
-## 流程
+<p align="center">
+  <img src="docs/overview.png" alt="六个步骤：登录、注册、挑头像、验证码、主题色、个人主页" width="100%">
+</p>
 
-| 步骤 | 交互 |
-|---|---|
-| 01 Sign in | 邮箱 / 密码登录；密码以柠檬片显示，眼睛按钮可切换明文；校验失败时字段抖动 + 提示 |
-| 02 Create account | 底部圆弧卡片弹性升起、标题乱码重排；姓名 / 邮箱 / 密码，五色强度条（Sour → Squeezed!） |
-| 03 Pick an avatar | 头像条可**拖动、甩动、点击、方向键**选择，带惯性和弹簧回弹；页面主题色跟随中间的头像；「This is me」后头像探出卡片 |
-| 04 Verify | 6 位验证码：自动跳格、退格回退、整段粘贴、自动提交；柠檬片转圈 → 对勾 → 波浪跳动；重发倒计时 |
-| 05 Make it yours | 点色块换主题色，颜色从被点击的色块处圆形扩散；支持方向键 |
-| 06 Profile | 卡片翻转成个人主页：头像破框、名字解码、贴纸依次落下；可返回改主题或退出登录 |
+## 亮点
 
-其他：
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/password.gif" alt="柠檬片密码与错误抖动" width="100%"><br>
+      <b>01 · 柠檬片密码</b><br>
+      每输入一位就多一片柠檬；眼睛按钮切换明文；账号不对时字段抖动、副标题变红提示。
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/signup.gif" alt="注册卡片升起与密码强度条" width="100%"><br>
+      <b>02 · 弹性卡片 + 强度条</b><br>
+      底部圆弧卡片弹性升起，标题乱码重排；五色强度条从 <code>Sour</code> 一路涨到 <code>Squeezed!</code>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/avatar.gif" alt="可拖动、甩动的头像条" width="100%"><br>
+      <b>03 · 能甩的头像条</b><br>
+      拖动、甩动、点击、方向键都能选，带惯性和弹簧回弹；主题色跟随中间的头像，「This is me」后头像探出卡片。
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/verify.gif" alt="6 位验证码" width="100%"><br>
+      <b>04 · 验证码</b><br>
+      自动跳格、退格回退、整段粘贴、填满自动提交；柠檬片转圈 → 对勾 → 数字波浪跳动。
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/theme.gif" alt="主题色从色块处圆形扩散" width="100%"><br>
+      <b>05 · 主题色扩散</b><br>
+      点色块换主题色，新颜色从被点的色块处圆形扩散开；也支持方向键切换。
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/profile.gif" alt="翻转出个人主页，并切换角色组" width="100%"><br>
+      <b>06 · 翻转个人卡片</b><br>
+      卡片翻面成个人主页：头像破框、名字解码、贴纸依次落下。右上角 Cast 1 / Cast 2 一键换一组角色。
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary><b>▶ 完整流程（约 36 秒）</b></summary>
+<br>
+<img src="docs/flow.gif" alt="从登录到个人主页的完整流程" width="100%">
+</details>
+
+## 更多细节
+
 - **一步步回退**：每一步卡片左上角都有返回按钮，浏览器后退键、手机返回手势也同样逐步回退（每一步都是一条浏览器历史记录）。
   - 回退顺序：资料卡 → 主题色 → 验证码 → 挑头像 → 注册 → 登录，前进键可以再走回去。
   - 回退后已填写的内容都会保留；验证码已经通过的，回到那一步显示「Continue」，不需要重新验证。
   - 退出登录后，后退不会回到已登录的步骤。
 - 首次打开时每拍换一个角色作为开场；之后再访问会记住你的头像、主题色和邮箱。
-- 右上角 **Cast 1 / Cast 2** 一键切换两组角色。
+- 左侧步骤栏的数字随步骤滚动切换（01 → 06）。
 - 适配桌面与手机：卡片按视口等比缩放，窄屏隐藏两侧装饰栏。
 - 支持键盘操作、屏幕阅读器标签，以及系统「减少动态效果」设置（会关闭动画）。
 
@@ -35,6 +78,7 @@ js/cast.js            角色数据（名字、主题色、脸部坐标）+ 首�
 js/app.js             交互逻辑：屏幕切换、弹簧动画、拖动、验证码、主题、个人卡片
 assets/img/cast1|2/   角色抠图（WebP，透明背景，720×960），单独授权见 assets/img/LICENSE.md
 assets/fonts/         字体文件 + 各自的 OFL 授权原文
+docs/                 README 用到的截图和动图（不影响页面运行）
 LICENSE               代码授权：CC BY-NC-SA 4.0
 ```
 
@@ -73,25 +117,3 @@ const api = {
 ## 浏览器支持
 
 Chrome / Edge 104+、Safari 15.4+、Firefox 105+（用到了 Web Animations、CSS `translate/scale` 独立属性、`clip-path` 动画、Pointer Events）。
-
-## 授权
-
-**代码**（`index.html`、`css/`、`js/`）采用 [CC BY-NC-SA 4.0](LICENSE)（知识共享 署名-非商业性使用-相同方式共享 4.0 国际）：
-
-- **署名**：使用或改编时，请注明原作者 cody999110 并附上本仓库链接；
-- **非商业性使用**：不得用于商业目的，包括但不限于商业产品或网站、外包 / 接单项目、付费课程、付费模板或素材；
-- **相同方式共享**：改编后的作品须以同样的 CC BY-NC-SA 4.0 协议公开。
-
-需要商业授权的，请通过本仓库的 Issues 联系作者。
-
-**角色图片**（`assets/img/`）不在上述 CC 协议范围内，单独授权：只能在运行、展示本项目时原样使用，不得单独提取、商用、用作头像或训练 AI 等，详见 [assets/img/LICENSE.md](assets/img/LICENSE.md)。图片由 AI（gpt-image-2）生成，描绘的是虚构人物，不对应任何真实个人。
-
-**字体**均为 SIL Open Font License 1.1，可随项目分发，授权原文在 `assets/fonts/`：
-
-- [Bodoni Moda](https://github.com/indestructible-type/Bodoni) — `OFL-BodoniModa.txt`
-- [Space Mono](https://github.com/googlefonts/spacemono) — `OFL-SpaceMono.txt`
-- [Geist](https://github.com/vercel/geist-font) — `OFL-Geist.txt`
-
----
-
-**English:** Code is licensed under [CC BY-NC-SA 4.0](LICENSE): credit the author (cody999110) with a link to this repository, no commercial use, and share adaptations under the same license. The character images in `assets/img/` are licensed separately and more restrictively — see [assets/img/LICENSE.md](assets/img/LICENSE.md). The fonts are under the SIL OFL 1.1.
